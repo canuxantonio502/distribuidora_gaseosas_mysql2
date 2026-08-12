@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS delvalle_distribuidora;
 USE delvalle_distribuidora;
 
 CREATE TABLE clientes(
-	id_cliente INT PRIMARY KEY,
+	id_cliente INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(40) NOT NULL,
     apellido VARCHAR(40) NOT NULL,
     identificacion VARCHAR(13) NOT NULL,
@@ -14,13 +14,13 @@ CREATE TABLE clientes(
 )ENGINE=InnoDB;
 
 CREATE TABLE categorias(
-	id_categoria INT PRIMARY KEY,
+	id_categoria INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(40) NOT NULL,
     volumen VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE productos(
-	id_producto INT PRIMARY KEY,
+	id_producto INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(40) NOT NULL,
     id_categoria INT NOT NULL,
     precio DECIMAL(5, 2),
@@ -29,13 +29,13 @@ CREATE TABLE productos(
 )ENGINE=InnoDB;
 
 CREATE TABLE encargados(
-	id_encargado INT PRIMARY KEY,
+	id_encargado INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(40) NOT NULL,
     identificacion VARCHAR(13) NOT NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE sedes(
-	id_sede INT PRIMARY KEY,
+	id_sede INT PRIMARY KEY AUTO_INCREMENT,
     nombre_sede VARCHAR(50) NOT NULL,
     ubicacion VARCHAR(200) NOT NULL,
     id_stock INT,
@@ -44,7 +44,7 @@ CREATE TABLE sedes(
 )ENGINE=InnoDB;
 
 CREATE TABLE detalle_pedidos(
-	id_detalle INT PRIMARY KEY,
+	id_detalle INT PRIMARY KEY AUTO_INCREMENT,
 	id_pedido INT,
     id_producto INT,
     cantidad INT,
@@ -53,7 +53,7 @@ CREATE TABLE detalle_pedidos(
 )ENGINE=InnoDB;
 
 CREATE TABLE pedidos(
-	id_pedido INT PRIMARY KEY,
+	id_pedido INT PRIMARY KEY AUTO_INCREMENT,
     id_cliente INT NOT NULL,
     id_detalle_pedido INT NOT NULL,
     id_sede INT NOT NULL,
@@ -67,8 +67,8 @@ CREATE TABLE pedidos(
 
 
 -- DROP TABLE stocks;
-CREATE TABLE stocks(
-	id_stock INT PRIMARY KEY,
+CREATE TABLE stocks (
+	id_stock INT PRIMARY KEY AUTO_INCREMENT,
 	id_sede INT NOT NULL,
     id_producto INT NOT NULL,
     stock_actual INT,
