@@ -12,4 +12,20 @@ BEGIN
     END IF;
 END //
 
+
+-- Pruebas -----------------------------------------------------------------------
+CREATE TABLE auditoria_precios(
+	id_auditoria INT PRIMARY KEY AUTO_INCREMENT,
+    fecha_auditoria DATETIME,
+    precio_anterior DECIMAL(10, 2),
+    precio_nuevo DECIMAL(10, 2)
+)ENGINE=InnoDB;
+
+CREATE TRIGGER tr_auditar_cambio_precio
+AFTER UPDATE ON productos FOR EACH ROW
+BEGIN
+	INSERT INTO auditoria_precios(fecha_auditoria, precio_anterior, precio_nuevo) 
+		VALUES (now, )
+END //
+
 DELIMITER ;
