@@ -72,3 +72,13 @@ CREATE TABLE detalle_pedidos(
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
     FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 ) ENGINE=InnoDB;
+
+
+CREATE TABLE auditoria_precios (
+    id_auditoria INT PRIMARY KEY AUTO_INCREMENT,
+    id_producto INT NOT NULL,
+    precio_anterior DECIMAL(10, 2) NOT NULL,
+    precio_nuevo DECIMAL(10, 2) NOT NULL,
+    fecha_cambio DATETIME NOT NULL,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+) ENGINE=InnoDB;
