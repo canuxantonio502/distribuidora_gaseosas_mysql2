@@ -21,8 +21,9 @@ SELECT P.id_producto, P.nombre AS nombre_producto, SUM(DP.cantidad) AS total_uni
     LIMIT 5;
 
 -- 4. Mostrar clientes y la cantidad de pedidos realizados.
-SELECT id_cliente, COUNT(1) total_pedidos FROM pedidos
-	GROUP BY id_cliente;
+SELECT P.id_cliente, CONCAT(C.nombre, ' ', C.apellido) cliente, COUNT(1) total_pedidos 
+	FROM pedidos P INNER JOIN clientes C ON C.id_cliente = P.id_cliente
+	GROUP BY P.id_cliente;
 
 -- 5. Buscar clientes por nombre parcial usando LIKE.
 SELECT id_cliente, concat(nombre, ' ', apellido) nombre, identificacion, direccion, telefono, correo
@@ -46,3 +47,27 @@ SELECT id_cliente, CONCAT(nombre, ' ', apellido)nombre, identificacion, direccio
 SELECT S.id_sede, S.nombre_sede, SUM(total_sin_iva) total_ingresos 
 	FROM pedidos P INNER JOIN sedes S ON S.id_sede = P.id_sede
 	GROUP BY P.id_sede;
+
+
+
+-- =====================================================================================================================
+-- VISTAS
+-- =====================================================================================================================
+
+-- 1. vista_resumen_pedidos_por_sede: Muestra la cantidad total de pedidos y ventas por sede.
+CREATE VIEW vw_resumen_pedidos_por_sede AS
+SELECT S.nombre_sede, COUNT(1) total_pedidos, SUM(total_sin_iva) total_ventas
+	FROM pedidos P INNER JOIN sedes S ON S.id_sede = P.id_sede
+	GROUP BY S.nombre_sede;
+
+-- 2. vista_productos_bajo_stock: Lista productos con stock_actual <= stock_minimo.
+CREATE VIEW vw_productos_bajo_stock AS
+SELECT P.id_producto, P.nombre, S.stock_actual, S.stock_minimo
+	FROM productos P INNER JOIN stocks S ON P.id_producto = S.id_producto
+	WHERE stock_actual <= stock_minimo;
+    
+-- 3. vista_clientes_activos: Muestra clientes con al menos un pedido registrado.
+CREATE VIEW vw_clientes_activos AS
+SELECT P.id_cliente, CONCAT(C.nombre, ' ', C.apellido) cliente, COUNT(1) total_pedidos 
+	FROM pedidos P INNER JOIN clientes C ON C.id_cliente = P.id_cliente
+	GROUP BY P.id_cliente, C.nombre, C.apellido;
