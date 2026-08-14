@@ -13,9 +13,11 @@ El modelo implementa lógica de negocios directamente en la base de datos a trav
 A continuación se presenta los diagramas lógico y físico de la base de datos, estructurado bajo reglas de normalización para evitar redundancias.
 
 ![Diagrama lógico](./docs/diagrama_logico.drawio.png)
+
 *(Nota: Captura generada desde draw.io)*
 
 ![Diagrama físico](./docs/diagrama_fisico.png)
+
 *(Nota: Captura generada desde MySQL Workbench)*
 
 
@@ -102,3 +104,8 @@ En la carpeta del proyecto se han probado con éxito las siguientes operaciones 
 ![Consulta Totales Sede](./evidencias/query_totales_sede.png)
 
 ---
+
+## :feather: Autores
+He aquí los responsables de que este proyecto se haya podido llevar a cabo:
+
+* **Antonio Canux** - *Único colaborador* - [canuxantonio502](https://github.com/canuxantonio502)
